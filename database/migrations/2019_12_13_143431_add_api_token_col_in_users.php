@@ -14,10 +14,12 @@ class AddApiTokenColInUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-
             /* Column name 'api_token' must match the 'storage_key' defined in config/auth.php configuration file */
-            $table->string('api_token')->unique()->nullable()->default(null);
-
+            $table->string('api_token')
+                ->unique()
+                ->nullable()
+                ->default(null)
+                ->after('password');
         });
     }
 

@@ -15,7 +15,17 @@ class CreateBookReviewsTable extends Migration
     {
         Schema::create('book_reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('book_id');
+            $table->text('comments');
+            $table->tinyInteger('review')->unsigned();
             $table->timestamps();
+
+            /* this make sures that same user can not be give multiple reviews to same book */
+            $table->unique(['user_id', 'book_id']);
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('book_id')->references('id')->on('books');
         });
     }
 

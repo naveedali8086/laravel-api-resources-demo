@@ -14,13 +14,14 @@ class CreateBookAuthorTable extends Migration
     public function up()
     {
         Schema::create('book_author', function (Blueprint $table) {
-
             $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('book_id');
 
+            /* this make sures that same author can not be assigned same book multiple times */
+            $table->unique(['author_id', 'book_id']);
+
             $table->foreign('author_id')->references('id')->on('authors');
             $table->foreign('book_id')->references('id')->on('books');
-
         });
     }
 
@@ -31,6 +32,6 @@ class CreateBookAuthorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('author_book');
+        Schema::dropIfExists('book_author');
     }
 }
