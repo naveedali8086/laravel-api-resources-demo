@@ -9,8 +9,7 @@ class BookReview extends Model
 {
 
     protected $fillable = [
-        /* 'user_id', 'book_id', */
-        'comments', 'review'
+        'book_id', 'comments', 'review'
     ];
 
     public function user()
