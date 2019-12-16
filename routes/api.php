@@ -22,13 +22,10 @@ Route::middleware('auth:api')->group(function () {
     /* updates a book */
     Route::post('edit-book/{id}', 'BooksController@edit');
 
-    /* deletes a book */
-    Route::post('delete-book/{id}', 'BooksController@');
-
     /* returns single book resource with its authors */
-    Route::get('get-book/{id}', 'BooksController@');
+    Route::get('get-book/{id}', 'BooksController@getBook');
 
     /* returns all books and their corresponding authors */
-    Route::get('get-books', 'BooksController@');
+    Route::get('get-books', 'BooksController@getBooks');
 
 });

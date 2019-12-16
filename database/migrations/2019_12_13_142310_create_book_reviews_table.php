@@ -21,6 +21,9 @@ class CreateBookReviewsTable extends Migration
             $table->tinyInteger('review')->unsigned();
             $table->timestamps();
 
+            /* this make sures that same user can not be give multiple reviews to same book */
+            $table->unique(['user_id', 'book_id']);
+
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('book_id')->references('id')->on('books');
         });

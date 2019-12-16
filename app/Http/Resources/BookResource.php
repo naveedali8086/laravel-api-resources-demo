@@ -22,7 +22,7 @@ class BookResource extends JsonResource
             'description' => $this->description,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'authors' => AuthorResource::collection($this->authors) // including all the authors related to the resource
+            'authors' => AuthorResource::collection($this->authors) // including all the related authors
         ];
 
     }

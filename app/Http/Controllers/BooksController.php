@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostBookRequest;
+use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class BooksController extends Controller
 {
 
+    /**
+     * Stores the Book resource and returns it
+     *
+     * @param PostBookRequest $request
+     * @return BookResource
+     */
     public function store(PostBookRequest $request)
     {
 
@@ -36,6 +41,13 @@ class BooksController extends Controller
     }
 
 
+    /**
+     * Updates the Book resource
+     *
+     * @param PostBookRequest $request
+     * @param $id
+     * @return BookResource
+     */
     public function edit(PostBookRequest $request, $id)
     {
 
@@ -67,6 +79,35 @@ class BooksController extends Controller
 
 
         return new BookResource($updated_book);
+    }
+
+
+    /**
+     * Returns the single Book resource
+     *
+     * @param $id
+     * @return BookResource
+     */
+    public function getBook($id)
+    {
+        return new BookResource(Book::findOrFail($id));
+    }
+
+
+    /**
+     * Returns Books resource as a collection with pagination
+     *
+     * @return BookCollection
+     */
+    public function getBooks()
+    {
+
+        /* Adding 'id' as constraint for getting data (obviously other contraints can be added or no constraint at all */
+        return new BookCollection(Book::query()
+            ->where('id', '>', 2)
+            ->paginate(2)
+        );
+
     }
 
 }

@@ -21,8 +21,8 @@ class BookReviewTableSeeder extends Seeder
         // creating bookReviews using BookReviewFactory
         $books->each(function (\App\Models\Book $book) use ($users) {
 
-            // getting bookReviews that has not been saved yet in DB
-            $book_reviews = factory(\App\Models\BookReview::class, 3)->make();
+            // creating bookReviews that has not been saved yet in DB
+            $book_reviews = factory(\App\Models\BookReview::class, 1)->make();
 
             $book_reviews->each(function (\App\Models\BookReview $bookReview) use ($users) {
 
